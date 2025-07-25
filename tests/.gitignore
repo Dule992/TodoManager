@@ -1,0 +1,18 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+# Allure
+allure-results/
+allure-report/
+# Coverage
+coverage/
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

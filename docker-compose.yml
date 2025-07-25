@@ -1,0 +1,53 @@
+services:
+  backend:
+    build: ./server
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+    networks:
+      - fullstack
+    volumes:
+      - ./server:/app
+    command: node index.js
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000"]
+      interval: 5s
+      retries: 10
+
+  frontend:
+    build: ./client
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - fullstack
+    volumes:
+      - ./client:/app
+    command: npm run dev
+
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.45.1-jammy
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - ./tests:/tests
+      - ./playwright.config.ts:/playwright.config.ts
+    working_dir: /tests
+    command:
+      [
+        "npx",
+        "playwright",
+        "test",
+        "--project=API Tests",
+        "--project=UI Tests on Chrome",
+        "",
+      ]
+    networks:
+      - fullstack
+
+networks:
+  fullstack:
+    driver: bridge

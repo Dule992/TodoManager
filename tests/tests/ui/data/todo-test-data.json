@@ -1,0 +1,16 @@
+{
+  "validData": {
+    "username": "test",
+    "password": "1234",
+    "todoTitle": "Write Playwright tests",
+    "todoUpdatedTitle": "Write Playwright tests - Updated",
+    "todoDeleteMe": "Delete me",
+    "colorCompletedStatus": "line-through solid rgb(33, 53, 71)"
+  },
+  "invalidData": {
+    "username": "invalid",
+    "password": "wrong",
+    "todo-title": "",
+    "todo-updated-title": ""
+  }
+}

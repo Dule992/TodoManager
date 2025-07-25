@@ -1,0 +1,5 @@
+{
+  "uiBaseURL": "http://localhost:5173",
+  "apiBaseURL": "http://localhost:4000",
+  "timeout": 10000
+}

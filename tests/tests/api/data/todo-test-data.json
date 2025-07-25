@@ -1,0 +1,22 @@
+{
+  "loginTestData": {
+    "validData": {
+      "username": "test",
+      "password": "1234"
+    },
+    "invalidData": {
+      "username": "invalid",
+      "password": "wrong"
+    }
+  },
+  "todoTestData": {
+    "validData": {
+      "title": "Test Todo",
+      "completed": false
+    },
+    "invalidData": {
+      "title": "",
+      "completed": "not_a_boolean"
+    }
+  }
+}

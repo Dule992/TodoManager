@@ -1,0 +1,43 @@
+{
+  "name": "ui",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "report": "allure generate --clean && allure open",
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --grep \"@ui\" --workers=1",
+    "test:ui:debug": "npx playwright test --grep \"@ui\" --workers=1 --debug",
+    "test:api": "npx playwright test --grep \"@api\" --workers=1",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write .",
+    "build": "tsc -p tests/tsconfig.json",
+    "start": "ts-node tests/tests/ui/login-test.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "1.52.0",
+    "@types/dotenv": "^6.1.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "22.15.3",
+    "@types/supertest": "^6.0.3",
+    "allure-playwright": "^3.3.2",
+    "eslint": "^9.31.0",
+    "globals": "^16.3.0",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "node-fetch": "^3.3.2"
+  }
+}
