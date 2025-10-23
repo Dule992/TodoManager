@@ -13,7 +13,8 @@ pipeline {
         sh '''
           rm -rf artifacts || true
           mkdir -p artifacts
-          docker-compose -f docker-compose.yml up -d --build
+          # Use docker/compose container to run compose if host has no docker-compose binary
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD":/workspace -w /workspace docker/compose:latest up -d --build
         '''
       }
     }
@@ -38,8 +39,8 @@ pipeline {
     stage('Run tests in Docker') {
       steps {
         sh '''
-          # Run tests inside the Playwright container defined in docker-compose.ci.yml
-          docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --abort-on-container-exit --exit-code-from tests --build
+           # Use docker/compose container to run the CI compose file and exit with tests result
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD":/workspace -w /workspace docker/compose:latest -f docker-compose.yml -f docker-compose.ci.yml up --abort-on-container-exit --exit-code-from tests --build
         '''
       }
     }
