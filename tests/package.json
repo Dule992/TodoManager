@@ -11,6 +11,7 @@
     "test:ui": "npx playwright test --grep \"@ui\" --workers=1",
     "test:ui:debug": "npx playwright test --grep \"@ui\" --workers=1 --debug",
     "test:api": "npx playwright test --grep \"@api\" --workers=1",
+    "test:api:debug": "npx playwright test --grep \"@api\" --workers=1 --debug",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "lint": "eslint . --ext .ts,.tsx",
