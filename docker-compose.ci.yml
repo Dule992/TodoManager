@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  tests:
+    image: mcr.microsoft.com/playwright:latest
+    working_dir: /workspace/tests
+    volumes:
+      - ./:/workspace:cached
+      - ./artifacts:/workspace/artifacts
+    networks:
+      - fullstack
+    depends_on:
+      - backend
+      - frontend
+    environment:
+      - CI=true
+    # Install deps, browsers and run tests; copy test reports to /workspace/artifacts
+    command: >
+      sh -c "
+        cd /workspace/tests &&
+        npm ci --legacy-peer-deps &&
+        npx playwright install --with-deps &&
+        npx playwright test --reporter=list --reporter=allure-playwright &&
+        mkdir -p /workspace/artifacts/playwright-report &&
+        cp -r playwright-report /workspace/artifacts/playwright-report || true
+      "
+
+networks:
+  fullstack:
+    external: true
